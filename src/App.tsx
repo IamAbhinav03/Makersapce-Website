@@ -15,6 +15,43 @@ interface HeaderProps {
 }
 
 // ICONS (using inline SVGs from Lucide Icons, as shadcn/ui does)
+
+const ClockIcon: React.FC<IconProps> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+
+const MapPinIcon: React.FC<IconProps> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
 const SunIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -364,6 +401,48 @@ const AboutSection: React.FC = () => (
   </section>
 );
 
+// HOURS & LOCATION SECTION
+const HoursLocationSection: React.FC = () => (
+  <section id="hours" className="py-12 md:py-24">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+          Hours & Location
+        </h2>
+        <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+          Come visit us and start creating.
+        </p>
+      </div>
+      <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 text-center">
+        <div className="bg-white/50 dark:bg-neutral-900/50 p-8 rounded-lg">
+          <ClockIcon className="w-12 h-12 mx-auto text-neutral-500 dark:text-neutral-400 mb-4" />
+          <h3 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
+            Working Hours
+          </h3>
+          <p className="text-lg text-neutral-600 dark:text-neutral-400">
+            Monday - Friday
+          </p>
+          <p className="text-lg text-neutral-600 dark:text-neutral-400">
+            11:00 AM - 6:00 PM
+          </p>
+        </div>
+        <div className="bg-white/50 dark:bg-neutral-900/50 p-8 rounded-lg">
+          <MapPinIcon className="w-12 h-12 mx-auto text-neutral-500 dark:text-neutral-400 mb-4" />
+          <h3 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
+            Our Location
+          </h3>
+          <p className="text-lg text-neutral-600 dark:text-neutral-400">
+            Academic Block 3
+          </p>
+          <p className="text-lg text-neutral-600 dark:text-neutral-400">
+            Rooms: AC03 - 006, 007
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
 // FAQ SECTION
 const FaqSection: React.FC = () => {
   const faqItems: AccordionItem[] = [
@@ -525,7 +604,7 @@ export default function App() {
         {/* Base color */}
         <div className="absolute inset-0 bg-neutral-50 dark:bg-neutral-950"></div>
         {/* Grid */}
-        <div className="absolute inset-0 bg-[radial-gradient(#d4d4d8_1px,transparent_1px)] dark:bg-[radial-gradient(#3f3f46_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(#d4d4d8_1px,transparent_1px)] dark:bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
         {/* Noise Texture */}
         <div
           className="absolute inset-0"
@@ -542,6 +621,7 @@ export default function App() {
       <main>
         <HeroSection />
         <AboutSection />
+        <HoursLocationSection />
         <FaqSection />
       </main>
       <Footer />

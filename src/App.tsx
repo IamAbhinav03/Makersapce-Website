@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from "react";
 
+// TYPE DEFINITIONS
+interface IconProps extends React.SVGProps<SVGSVGElement> {}
+interface AccordionItem {
+  question: string;
+  answer: string;
+}
+interface AccordionProps {
+  items: AccordionItem[];
+}
+interface HeaderProps {
+  theme: string;
+  toggleTheme: () => void;
+}
+
 // ICONS (using inline SVGs from Lucide Icons, as shadcn/ui does)
-const SunIcon = (props) => (
+const SunIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -26,7 +40,7 @@ const SunIcon = (props) => (
   </svg>
 );
 
-const MoonIcon = (props) => (
+const MoonIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -43,7 +57,7 @@ const MoonIcon = (props) => (
   </svg>
 );
 
-const MenuIcon = (props) => (
+const MenuIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -62,7 +76,7 @@ const MenuIcon = (props) => (
   </svg>
 );
 
-const XIcon = (props) => (
+const XIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -80,7 +94,7 @@ const XIcon = (props) => (
   </svg>
 );
 
-const ChevronDownIcon = (props) => (
+const ChevronDownIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -97,7 +111,7 @@ const ChevronDownIcon = (props) => (
   </svg>
 );
 
-const TwitterIcon = (props) => (
+const TwitterIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -114,7 +128,7 @@ const TwitterIcon = (props) => (
   </svg>
 );
 
-const InstagramIcon = (props) => (
+const InstagramIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -133,7 +147,7 @@ const InstagramIcon = (props) => (
   </svg>
 );
 
-const GithubIcon = (props) => (
+const GithubIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -152,11 +166,10 @@ const GithubIcon = (props) => (
 );
 
 // SHADCN-LIKE ACCORDION COMPONENT
-// This is a custom implementation that mimics the behavior and style of shadcn/ui's Accordion.
-const Accordion = ({ items }) => {
-  const [openIndex, setOpenIndex] = useState(null);
+const Accordion: React.FC<AccordionProps> = ({ items }) => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const handleClick = (index) => {
+  const handleClick = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
@@ -194,11 +207,14 @@ const Accordion = ({ items }) => {
 };
 
 // HEADER COMPONENT
-const Header = ({ theme, toggleTheme }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navLinks = ["Home", "About", "FAQ", "Contact"];
+const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const navLinks: string[] = ["Home", "About", "FAQ", "Contact"];
 
-  const handleLinkClick = (e, targetId) => {
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) => {
     e.preventDefault();
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
@@ -278,7 +294,7 @@ const Header = ({ theme, toggleTheme }) => {
 };
 
 // HERO SECTION
-const HeroSection = () => (
+const HeroSection: React.FC = () => (
   <section id="home" className="pt-16">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
       <div className="relative w-full aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-2xl shadow-neutral-900/20 dark:shadow-black/40">
@@ -286,9 +302,10 @@ const HeroSection = () => (
           src="./hero.jpeg"
           alt="Makerspace workshop"
           className="w-full h-full object-cover"
-          onError={(currentTarget) => {
-            currentTarget.onerror = null;
-            currentTarget.src =
+          onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+            const target = e.target as HTMLImageElement;
+            target.onerror = null;
+            target.src =
               "https://placehold.co/1600x900/cccccc/333333?text=Image+Not+Found";
           }}
         />
@@ -308,7 +325,7 @@ const HeroSection = () => (
 );
 
 // ABOUT SECTION
-const AboutSection = () => (
+const AboutSection: React.FC = () => (
   <section
     id="about"
     className="py-12 md:py-24 bg-white/50 dark:bg-neutral-900/50"
@@ -348,8 +365,8 @@ const AboutSection = () => (
 );
 
 // FAQ SECTION
-const FaqSection = () => {
-  const faqItems = [
+const FaqSection: React.FC = () => {
+  const faqItems: AccordionItem[] = [
     {
       question: "Who can use the makerspace?",
       answer:
@@ -390,7 +407,7 @@ const FaqSection = () => {
 };
 
 // FOOTER SECTION
-const Footer = () => (
+const Footer: React.FC = () => (
   <footer
     id="contact"
     className="bg-white/50 dark:bg-neutral-900/50 border-t border-neutral-200 dark:border-neutral-800"
@@ -414,7 +431,7 @@ const Footer = () => (
               href="mailto:contact@makerspace.edu"
               className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
-              contact@makerspace.edu
+              makerspace@ashoka.edu.in
             </a>
           </p>
         </div>
@@ -454,7 +471,6 @@ const Footer = () => (
               width="100%"
               height="100%"
               style={{ border: 0 }}
-              // allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Ashoka University Location"
@@ -473,7 +489,7 @@ const Footer = () => (
 
 // MAIN APP COMPONENT
 export default function App() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
     // On mount, check for saved theme or system preference

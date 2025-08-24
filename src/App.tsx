@@ -351,7 +351,7 @@ const HeroSection: React.FC = () => (
           <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight">
             Innovate. Create. Collaborate.
           </h1>
-          <p className="mt-4 text-lg md:text-xl text-neutral-200 max-w-2xl">
+          <p className="mt-4 text-lg md:text-3xl text-neutral-200 max-w-2xl">
             Your community workshop for digital fabrication, prototyping, and
             hands-on learning.
           </p>
